@@ -24,47 +24,68 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // testing API
-        swifter.searchTweet(using: "@Trump", lang: "en", count: 100, tweetMode: .extended) { results, metadata in
-            let decoder = JSONDecoder()
-            do {
-                // get tweets
-                var tweets: [TwitterAnalyzerInput] = []
-                for i in 0..<100 {
-                    if let tweet = results[i]["full_text"].string {
-                        tweets.append(TwitterAnalyzerInput(text: tweet))
-                    }
-                }
-                // make batch prediction
-                do {
-                    let predictions = try self.classifier.predictions(inputs: tweets)
-                    var score = 0
-                    for prediction in predictions {
-                        switch prediction.label {
-                        case "Pos":
-                            score += 1
-                        case "Neg":
-                            score -= 1
-                        default:
-                            break
-                        }
-                    }
-                    print(score)
-                } catch {
-                    print("Prediction error: \(error.localizedDescription)")
-                }
-                
-            } catch {
-                print("Error while decoding data: \(error.localizedDescription)")
-            }
-        } failure: { error in
-            print("Error in Twitter API request: \(error.localizedDescription)")
-        }
-        
+        // dismiss keyboard by random tap
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
     @IBAction func predictPressed(_ sender: Any) {
-        
+        if let searchTerm = textField.text {
+            swifter.searchTweet(using: searchTerm, lang: "en", count: 100, tweetMode: .extended) { results, metadata in
+                let decoder = JSONDecoder()
+                do {
+                    // get tweets
+                    var tweets: [TwitterAnalyzerInput] = []
+                    for i in 0..<100 {
+                        if let tweet = results[i]["full_text"].string {
+                            tweets.append(TwitterAnalyzerInput(text: tweet))
+                        }
+                    }
+                    // make batch prediction
+                    do {
+                        let predictions = try self.classifier.predictions(inputs: tweets)
+                        var score = 0
+                        for prediction in predictions {
+                            switch prediction.label {
+                            case "Pos":
+                                score += 1
+                            case "Neg":
+                                score -= 1
+                            default:
+                                break
+                            }
+                        }
+                        // update UI
+                        if score > 20 {
+                            self.sentimentLabel.text = "🥰"
+                        } else if score > 10 {
+                            self.sentimentLabel.text = "😀"
+                        } else if score > 0 {
+                            self.sentimentLabel.text = "🙂"
+                        } else if score == 0 {
+                            self.sentimentLabel.text = "😐"
+                        } else if score > -10 {
+                            self.sentimentLabel.text = "🙁"
+                        } else if score > -20 {
+                            self.sentimentLabel.text = "😠"
+                        } else {
+                            self.sentimentLabel.text = "😡"
+                        }
+                    } catch {
+                        print("Prediction error: \(error.localizedDescription)")
+                    }
+                } catch {
+                    print("Error while decoding data: \(error.localizedDescription)")
+                }
+            } failure: { error in
+                print("Error in Twitter API request: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    // Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
 }
