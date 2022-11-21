@@ -25,16 +25,35 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // testing API
-        swifter.searchTweet(using: "@Apple", lang: "en", count: 100, tweetMode: .extended) { results, metadata in
+        swifter.searchTweet(using: "@Trump", lang: "en", count: 100, tweetMode: .extended) { results, metadata in
             let decoder = JSONDecoder()
             do {
                 // get tweets
-                var tweets: [String] = []
+                var tweets: [TwitterAnalyzerInput] = []
                 for i in 0..<100 {
                     if let tweet = results[i]["full_text"].string {
-                        tweets.append(tweet)
+                        tweets.append(TwitterAnalyzerInput(text: tweet))
                     }
                 }
+                // make batch prediction
+                do {
+                    let predictions = try self.classifier.predictions(inputs: tweets)
+                    var score = 0
+                    for prediction in predictions {
+                        switch prediction.label {
+                        case "Pos":
+                            score += 1
+                        case "Neg":
+                            score -= 1
+                        default:
+                            break
+                        }
+                    }
+                    print(score)
+                } catch {
+                    print("Prediction error: \(error.localizedDescription)")
+                }
+                
             } catch {
                 print("Error while decoding data: \(error.localizedDescription)")
             }
