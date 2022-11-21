@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 		E6A915AA292BCDFD00E72B22 /* TwitterAnalyzer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E6A915A9292BCDFD00E72B22 /* TwitterAnalyzer.mlmodel */; };
 		E6A915BE292BD22600E72B22 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A915B4292BD1F100E72B22 /* SwifteriOS.framework */; };
 		E6A915BF292BD22600E72B22 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6A915B4292BD1F100E72B22 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6A915C2292BD81D00E72B22 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A915C1292BD81D00E72B22 /* K.swift */; };
+		E6A915C5292BE9B400E72B22 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E6A915C4292BE9B400E72B22 /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,7 @@
 		AD9EC66120FE319A002AE9BF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E6A915A9292BCDFD00E72B22 /* TwitterAnalyzer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TwitterAnalyzer.mlmodel; sourceTree = "<group>"; };
 		E6A915AB292BD1F100E72B22 /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = ../../../Swifter/Swifter.xcodeproj; sourceTree = "<group>"; };
+		E6A915C1292BD81D00E72B22 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6A915C5292BE9B400E72B22 /* SwiftyJSON in Frameworks */,
 				E6A915BE292BD22600E72B22 /* SwifteriOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +128,7 @@
 				AD9EC65820FE2EF7002AE9BF /* LaunchScreen.storyboard */,
 				AD9EC65B20FE2EF7002AE9BF /* Info.plist */,
 				E6A915A9292BCDFD00E72B22 /* TwitterAnalyzer.mlmodel */,
+				E6A915C1292BD81D00E72B22 /* K.swift */,
 			);
 			path = Twittermenti;
 			sourceTree = "<group>";
@@ -164,6 +169,9 @@
 			dependencies = (
 			);
 			name = Twittermenti;
+			packageProductDependencies = (
+				E6A915C4292BE9B400E72B22 /* SwiftyJSON */,
+			);
 			productName = Twittermenti;
 			productReference = AD9EC64C20FE2EF4002AE9BF /* Twittermenti.app */;
 			productType = "com.apple.product-type.application";
@@ -192,6 +200,9 @@
 				Base,
 			);
 			mainGroup = AD9EC64320FE2EF4002AE9BF;
+			packageReferences = (
+				E6A915C3292BE9B300E72B22 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = AD9EC64D20FE2EF4002AE9BF /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -265,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD9EC65220FE2EF4002AE9BF /* ViewController.swift in Sources */,
+				E6A915C2292BD81D00E72B22 /* K.swift in Sources */,
 				AD9EC65020FE2EF4002AE9BF /* AppDelegate.swift in Sources */,
 				E6A915AA292BCDFD00E72B22 /* TwitterAnalyzer.mlmodel in Sources */,
 			);
@@ -468,6 +480,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E6A915C3292BE9B300E72B22 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E6A915C4292BE9B400E72B22 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6A915C3292BE9B300E72B22 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AD9EC64420FE2EF4002AE9BF /* Project object */;
 }
