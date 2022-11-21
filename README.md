@@ -1,11 +1,5 @@
-
-![App Brewery Banner](Documentation/AppBreweryBanner.png)
-
 #  Twittermenti
+iOS Application that uses custom trained CreateML model to analyze Twitter data about a particular company and derive people's opinion about it. 
 
 
 
-
->This is a companion project to The App Brewery's Complete App Developement Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
-
-![End Banner](Documentation/readme-end-banner.png)
